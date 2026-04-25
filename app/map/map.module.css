@@ -1,0 +1,273 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0a0808; /* Very dark brownish-black */
+  color: #e0d8c8; /* Bone white / parchment */
+  font-family: 'Crimson Text', 'Garamond', 'Georgia', serif;
+  overflow: hidden;
+}
+
+.mapViewport {
+  flex-grow: 1;
+  position: relative;
+}
+
+.mapCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  width: 400px;
+  min-width: 400px;
+  flex-shrink: 0;
+  background-color: #140f0d; /* Dark stone/wood */
+  border-left: 1px solid rgba(138, 109, 59, 0.4); /* Tarnished gold */
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.9);
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.title {
+  color: #d4af37; /* Gold */
+  font-family: 'Cinzel', 'Trajan Pro', 'Georgia', serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.panel {
+  background: rgba(10, 8, 8, 0.6); /* Darker inset */
+  border-radius: 4px; /* Less rounded, more gothic */
+  padding: 16px;
+  border: 1px solid rgba(138, 109, 59, 0.2); /* Faint gold border */
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.panelTitle {
+  font-size: 0.95rem;
+  color: #c5a059; /* Muted gold */
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  letter-spacing: 2px;
+  border-bottom: 1px solid rgba(138, 109, 59, 0.1);
+  padding-bottom: 6px;
+}
+
+/* Map Grid Elements */
+.room {
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.tile {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile:hover {
+  z-index: 5;
+}
+
+.tileSelected {
+  background-color: rgba(139, 0, 0, 0.4); /* Blood red */
+  z-index: 10;
+}
+
+.tagIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+/* Tile Modifiers */
+.bossRoom {
+  background-color: rgba(183, 28, 28, 0.2); /* Deeper crimson */
+}
+
+.bossRoom .tagIndicator {
+  background: #b71c1c;
+  box-shadow: 0 0 5px #b71c1c;
+}
+
+.collectible {
+  background-color: rgba(212, 175, 55, 0.15); /* Gold tint */
+}
+
+.collectible .tagIndicator {
+  background: #d4af37;
+  box-shadow: 0 0 5px #d4af37;
+}
+
+.hidden {
+  opacity: 0.5;
+  border-style: dashed;
+}
+
+/* Layered Wall Engine */
+.wallTop,
+.wallBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #c5c6c7;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.wallTop {
+  top: -2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.wallBottom {
+  bottom: -2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.wallLeft,
+.wallRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #c5c6c7;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.wallLeft {
+  left: -2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.wallRight {
+  right: -2px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+/* Layered Half-Open Doors */
+.doorTop,
+.doorBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.doorTop {
+  top: -2px;
+  background: linear-gradient(90deg, #c5c6c7 0%, #c5c6c7 25%, transparent 25%, transparent 75%, #c5c6c7 75%, #c5c6c7 100%);
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-image: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.4) 75%) 1;
+}
+
+.doorBottom {
+  bottom: -2px;
+  background: linear-gradient(90deg, #c5c6c7 0%, #c5c6c7 25%, transparent 25%, transparent 75%, #c5c6c7 75%, #c5c6c7 100%);
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-image: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.4) 75%) 1;
+}
+
+.doorLeft,
+.doorRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.doorLeft {
+  left: -2px;
+  background: linear-gradient(180deg, #c5c6c7 0%, #c5c6c7 25%, transparent 25%, transparent 75%, #c5c6c7 75%, #c5c6c7 100%);
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(0, 0, 0, 0.4);
+  border-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.4) 75%) 1;
+}
+
+.doorRight {
+  right: -2px;
+  background: linear-gradient(180deg, #c5c6c7 0%, #c5c6c7 25%, transparent 25%, transparent 75%, #c5c6c7 75%, #c5c6c7 100%);
+  border-left: 1px solid rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(0, 0, 0, 0.4);
+  border-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.4) 75%) 1;
+}
+
+/* UI Elements */
+.button {
+  background: rgba(138, 109, 59, 0.1); /* Dark gold tint */
+  border: 1px solid #8a6d3b; /* Gold border */
+  color: #d4af37; /* Bright gold text */
+  padding: 8px 16px;
+  border-radius: 2px; /* Sharper corners */
+  cursor: pointer;
+  font-weight: bold;
+  font-family: inherit;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.button:hover {
+  background: rgba(139, 0, 0, 0.4); /* Blood red hover */
+  border-color: #b71c1c;
+  color: #e0d8c8;
+  box-shadow: 0 0 10px rgba(183, 28, 28, 0.4);
+}
+
+.filterToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.filterToggle input {
+  cursor: pointer;
+}

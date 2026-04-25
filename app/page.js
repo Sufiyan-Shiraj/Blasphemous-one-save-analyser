@@ -1,66 +1,30 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from 'next/link';
 
 export default function Home() {
+  const hubs = [
+    { title: 'Map Editor', desc: 'Deep dive into the 1,000+ tile grid of Cvstodia.', path: '/map', icon: '🗺️' },
+    { title: 'Rosary Beads', desc: 'Track all 50+ beads and their divine effects.', path: '/beads', icon: '📿' },
+    { title: 'Prayers', desc: 'Command the Miracle with magical abilities.', path: '/prayers', icon: '📜' },
+    { title: 'Relics', desc: 'Passive items to alter your perception.', path: '/relics', icon: '👁️' },
+    { title: 'Collectibles', desc: 'Find all 44 bones for the Ossuary achievement.', path: '/bones', icon: '🦴' },
+  ];
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="hub-wrapper">
+      <div className="background-overlay"></div>
+      
+      <h1>CVSTODIA ARCHIVES</h1>
+      <p className="subtitle">The Penitent One's Comprehensive Guide</p>
+
+      <div className="hub-grid">
+        {hubs.map((hub) => (
+          <Link key={hub.path} href={hub.path} className="hub-card">
+            <span className="icon">{hub.icon}</span>
+            <h2>{hub.title}</h2>
+            <p>{hub.desc}</p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

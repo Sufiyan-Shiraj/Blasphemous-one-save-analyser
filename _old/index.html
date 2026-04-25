@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blasphemous Rosary Beads Checklist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=MedievalSharp&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <header>
+            <h1>Rosary Beads</h1>
+            <p class="subtitle">Cvstodia Collection Checklist</p>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a bead..." autocomplete="off">
+                <span class="search-icon">⚲</span>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-group">
+                    <span class="filter-label">Status:</span>
+                    <div class="filter-chips" id="statusFilters">
+                        <button class="chip active" data-filter="all">All</button>
+                        <button class="chip" data-filter="checked">Checked</button>
+                        <button class="chip" data-filter="unchecked">Unchecked</button>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <span class="filter-label">Categories:</span>
+                    <div class="filter-chips" id="tagFilters">
+                        <button class="chip" data-tag="normal">Normal</button>
+                        <button class="chip" data-tag="dlc">DLC</button>
+                        <button class="chip" data-tag="ng-plus">NG+</button>
+                        <button class="chip" data-tag="secret">Secret</button>
+                        <button class="chip" data-tag="missable">Missable</button>
+                        <button class="chip" data-tag="true-ending">True Ending</button>
+                    </div>
+                </div>
+
+                <div class="filter-controls">
+                    <div class="logic-toggle-container" title="Determine how multiple categories combine">
+                        <span>Logic:</span>
+                        <div class="logic-switch" id="logicToggle">
+                            <span class="logic-option active" data-logic="AND">AND</span>
+                            <span class="logic-option" data-logic="OR">OR</span>
+                        </div>
+                    </div>
+                    <button id="clearFilters" class="clear-btn">Clear All</button>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <span id="progressText">0 / 50</span>
+            </div>
+        </header>
+
+        <main>
+            <ul id="checklist" class="bead-list">
+                <!-- Base Game Beads (30) -->
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Amber Eye"><span class="checkmark"></span><span class="item-name">Amber
+                            Eye</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Big Bead of Blue Wax"><span class="checkmark"></span><span class="item-name">Big
+                            Bead of Blue Wax</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Big Bead of Red Wax"><span class="checkmark"></span><span class="item-name">Big
+                            Bead of Red Wax</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Big Toe made of Limestone"><span class="checkmark"></span><span
+                            class="item-name">Big Toe made of Limestone</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Calcified Eye of Erudition"><span class="checkmark"></span><span
+                            class="item-name">Calcified Eye of Erudition</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Consecrated Amethyst"><span class="checkmark"></span><span
+                            class="item-name">Consecrated Amethyst</span></label></li>
+                <li class="bead-item" data-tags="normal,missable"><label class="checkbox-container"><input
+                            type="checkbox" data-name="Dove Skull"><span class="checkmark"></span><span
+                            class="item-name">Dove Skull</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Drop of Coagulated Ink"><span class="checkmark"></span><span
+                            class="item-name">Drop of Coagulated Ink</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Ember of the Holy Cremation"><span class="checkmark"></span><span
+                            class="item-name">Ember of the Holy Cremation</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Embers of a Broken Star"><span class="checkmark"></span><span
+                            class="item-name">Embers of a Broken Star</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Fourth Toe Made of Limestone"><span class="checkmark"></span><span
+                            class="item-name">Fourth Toe Made of Limestone</span></label></li>
+                <li class="bead-item" data-tags="normal,missable"><label class="checkbox-container"><input
+                            type="checkbox" data-name="Frozen Olive"><span class="checkmark"></span><span
+                            class="item-name">Frozen Olive</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Hollow Pearl"><span class="checkmark"></span><span class="item-name">Hollow
+                            Pearl</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Knot of Hair"><span class="checkmark"></span><span class="item-name">Knot of
+                            Hair</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Little Toe Made of Limestone"><span class="checkmark"></span><span
+                            class="item-name">Little Toe Made of Limestone</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Moss Preserved in Glass"><span class="checkmark"></span><span
+                            class="item-name">Moss Preserved in Glass</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Muted Bell"><span class="checkmark"></span><span class="item-name">Muted
+                            Bell</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Painted Wood Bead"><span class="checkmark"></span><span class="item-name">Painted
+                            Wood Bead</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Pelican Effigy"><span class="checkmark"></span><span class="item-name">Pelican
+                            Effigy</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Perpetva's Protection"><span class="checkmark"></span><span
+                            class="item-name">Perpetva's Protection</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Piece of a Golden Mask"><span class="checkmark"></span><span
+                            class="item-name">Piece of a Golden Mask</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Piece of a Tombstone"><span class="checkmark"></span><span
+                            class="item-name">Piece of a Tombstone</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Quirce's Scorched Bead"><span class="checkmark"></span><span
+                            class="item-name">Quirce's Scorched Bead</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Scaly Coin"><span class="checkmark"></span><span class="item-name">Scaly
+                            Coin</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Seashell of the Inverted Spiral"><span class="checkmark"></span><span
+                            class="item-name">Seashell of the Inverted Spiral</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Silver Grape"><span class="checkmark"></span><span class="item-name">Silver
+                            Grape</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Sphere of the Sacred Smoke"><span class="checkmark"></span><span
+                            class="item-name">Sphere of the Sacred Smoke</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Thorned Symbol"><span class="checkmark"></span><span class="item-name">Thorned
+                            Symbol</span></label></li>
+                <li class="bead-item" data-tags="normal"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Uvula of Proclamation"><span class="checkmark"></span><span
+                            class="item-name">Uvula of Proclamation</span></label></li>
+                <li class="bead-item" data-tags="normal,missable"><label class="checkbox-container"><input
+                            type="checkbox" data-name="Wicker Knot"><span class="checkmark"></span><span
+                            class="item-name">Wicker Knot</span></label></li>
+
+                <!-- DLC / NG+ / Secret Additions -->
+                <li class="bead-item" data-tags="ng-plus,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Reliquary of the Fervent Heart"><span class="checkmark"></span><span
+                            class="item-name">Reliquary of the Fervent Heart <span
+                                class="tag ng-plus">NG+</span></span></label></li>
+                <li class="bead-item" data-tags="ng-plus,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Reliquary of the Sorrowful Heart"><span class="checkmark"></span><span
+                            class="item-name">Reliquary of the Sorrowful Heart <span
+                                class="tag ng-plus">NG+</span></span></label></li>
+                <li class="bead-item" data-tags="ng-plus,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Reliquary of the Suffering Heart"><span class="checkmark"></span><span
+                            class="item-name">Reliquary of the Suffering Heart <span
+                                class="tag ng-plus">NG+</span></span></label></li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Bead of Gold Thread"><span class="checkmark"></span><span class="item-name">Bead
+                            of Gold Thread <span class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Aspirant's Rosary Bead"><span class="checkmark"></span><span
+                            class="item-name">Aspirant's Rosary Bead <span class="tag ng-plus">DLC</span></span></label>
+                </li>
+                <li class="bead-item" data-tags="ng-plus,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Saeta of the Golden Rose"><span class="checkmark"></span><span
+                            class="item-name">Saeta of the Golden Rose <span
+                                class="tag ng-plus">NG+</span></span></label></li>
+                <li class="bead-item" data-tags="ng-plus,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Young Man's Face"><span class="checkmark"></span><span class="item-name">Young
+                            Man's Face <span class="tag ng-plus">NG+</span></span></label></li>
+                <li class="bead-item" data-tags="ng-plus,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Old Man's Face"><span class="checkmark"></span><span class="item-name">Old Man's
+                            Face <span class="tag ng-plus">NG+</span></span></label></li>
+                <li class="bead-item" data-tags="ng-plus,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Crown of Gnawed Iron"><span class="checkmark"></span><span
+                            class="item-name">Crown of Gnawed Iron <span class="tag ng-plus">NG+</span></span></label>
+                </li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Solitude"><span class="checkmark"></span><span class="item-name">Solitude <span
+                                class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="The Young Mason's Wheel"><span class="checkmark"></span><span
+                            class="item-name">The Young Mason's Wheel <span
+                                class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Crimson Heart of a Miura"><span class="checkmark"></span><span
+                            class="item-name">Crimson Heart of a Miura <span
+                                class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Light of the Lady of the Lamp"><span class="checkmark"></span><span
+                            class="item-name">Light of the Lady of the Lamp <span
+                                class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="secret,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Cloistered Sapphire"><span class="checkmark"></span><span
+                            class="item-name">Cloistered Sapphire <span class="tag ng-plus">Secret</span></span></label>
+                </li>
+                <li class="bead-item" data-tags="secret,dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Cloistered Ruby"><span class="checkmark"></span><span
+                            class="item-name">Cloistered Ruby <span class="tag ng-plus">Secret</span></span></label>
+                </li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Scale of Burnished Gold"><span class="checkmark"></span><span
+                            class="item-name">Scale of Burnished Gold <span
+                                class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Scale of Burnished Alabaster"><span class="checkmark"></span><span
+                            class="item-name">Scale of Burnished Alabaster <span
+                                class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="dlc"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Salt-covered Spear Point"><span class="checkmark"></span><span
+                            class="item-name">Salt-covered Spear Point <span
+                                class="tag ng-plus">DLC</span></span></label></li>
+                <li class="bead-item" data-tags="secret"><label class="checkbox-container"><input type="checkbox"
+                            data-name="Concentrated Sphere of Guilt"><span class="checkmark"></span><span
+                            class="item-name">Concentrated Sphere of Guilt <span
+                                class="tag ng-plus">Secret</span></span></label></li>
+                <li class="bead-item" data-tags="secret,true-ending"><label class="checkbox-container"><input
+                            type="checkbox" data-name="Bead of the Immaculate / Weight of True Guilt"><span
+                            class="checkmark"></span><span class="item-name">Bead of the Immaculate / Weight of True
+                            Guilt <span class="tag ng-plus">Secret</span></span></label></li>
+            </ul>
+        </main>
+
+        <footer>
+            <p>For twisted are the paths of the Miracle.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

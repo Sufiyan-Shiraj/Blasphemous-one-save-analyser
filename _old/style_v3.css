@@ -1,0 +1,475 @@
+:root {
+    --blood-red: #8b0000;
+    --blood-red-bright: #af0000;
+    --tarnished-gold: #b8860b;
+    --iron-dark: #1a1a1a;
+    --iron-light: #2c2c2c;
+    --stone-bg: #101010;
+    --parchment: #d3c0a8;
+}
+
+@font-face {
+    font-family: 'MedievalSharp';
+    src: url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'MedievalSharp', cursive;
+    background-color: var(--stone-bg);
+    color: var(--parchment);
+    min-height: 100vh;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%),
+        url('https://www.transparenttextures.com/patterns/dark-stone.png');
+    z-index: -1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #181818;
+    border: 3px solid #2a2a2a;
+    outline: 1px solid var(--tarnished-gold);
+    outline-offset: -10px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1), inset 0 0 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Decorative Corners */
+.container::before, .container::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--tarnished-gold);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.container::before {
+    top: 5px;
+    left: 5px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.container::after {
+    bottom: 5px;
+    right: 5px;
+    border-left: none;
+    border-top: none;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    color: var(--blood-red);
+    margin: 0;
+    text-shadow: 2px 2px 0px #000, 0 0 20px rgba(139, 0, 0, 0.4);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--tarnished-gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 5px;
+    opacity: 0.7;
+}
+
+.search-container {
+    margin-top: 30px;
+    position: relative;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    background: #0d0d0d;
+    border: 2px solid var(--iron-light);
+    color: var(--parchment);
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.1rem;
+    border-radius: 0;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: inset 0 0 10px #000;
+}
+
+#searchInput:focus {
+    border-color: var(--blood-red);
+    background: #111;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--tarnished-gold);
+    font-size: 1.5rem;
+    pointer-events: none;
+}
+
+/* Filter Section */
+.filter-section {
+    background: #121212;
+    border: 1px solid var(--iron-light);
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-size: 0.8rem;
+    color: var(--tarnished-gold);
+    text-transform: uppercase;
+    min-width: 90px;
+    font-weight: bold;
+}
+
+.filter-chips {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    background: #1a1a1a;
+    border: 1px solid var(--iron-light);
+    color: var(--parchment);
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 0.85rem;
+}
+
+.chip:hover {
+    background: #222;
+    border-color: var(--tarnished-gold);
+}
+
+.chip.active {
+    background: var(--blood-red);
+    border-color: var(--tarnished-gold);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+}
+
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--iron-light);
+    padding-top: 15px;
+}
+
+.logic-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+}
+
+.logic-switch {
+    display: flex;
+    background: #000;
+    border: 1px solid var(--tarnished-gold);
+    overflow: hidden;
+}
+
+.logic-option {
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.logic-option.active {
+    background: var(--tarnished-gold);
+    color: #000;
+    opacity: 1;
+    font-weight: bold;
+}
+
+.clear-btn {
+    background: none;
+    border: 1px solid var(--iron-light);
+    color: #666;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.clear-btn:hover {
+    color: var(--blood-red);
+    border-color: var(--blood-red);
+}
+
+/* Reliquary Progress Bar */
+.progress-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.progress-bar-container {
+    background: #0a0a0a;
+    height: 16px;
+    flex-grow: 1;
+    border: 2px solid var(--iron-light);
+    position: relative;
+    box-shadow: inset 0 0 10px #000;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #500000, var(--blood-red));
+    box-shadow: 0 0 15px var(--blood-red-bright);
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255,255,255,0.05) 11px);
+}
+
+#progressText {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--tarnished-gold);
+    min-width: 80px;
+    text-align: right;
+    letter-spacing: 1px;
+}
+
+/* Bead List */
+.bead-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 40px;
+}
+
+.bead-item {
+    margin-bottom: 5px;
+    background: #151515;
+    border: 1px solid var(--iron-light);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s;
+}
+
+.bead-item.hidden {
+    display: none;
+}
+
+.bead-item:hover {
+    background: #1c1c1c;
+    border-color: var(--tarnished-gold);
+}
+
+.item-main {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+}
+
+/* Checkbox - Iron Spike Style */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 45px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    user-select: none;
+    flex-grow: 1;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: #0d0d0d;
+    border: 2px solid var(--iron-light);
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    border-color: var(--tarnished-gold);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--blood-red);
+    border-color: var(--tarnished-gold);
+    box-shadow: 0 0 10px var(--blood-red);
+}
+
+.checkmark:after {
+    content: "♰";
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.details-toggle {
+    background: none;
+    border: 1px solid var(--iron-light);
+    color: var(--tarnished-gold);
+    padding: 5px 12px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.details-toggle:hover {
+    background: var(--tarnished-gold);
+    color: #000;
+}
+
+.details-toggle.active {
+    background: var(--blood-red);
+    border-color: var(--tarnished-gold);
+    color: #fff;
+}
+
+/* Stone Inscription Details Panel */
+.details-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    background: #0d0d0d;
+}
+
+.details-panel.open {
+    max-height: 500px;
+    border-top: 1px solid var(--tarnished-gold);
+}
+
+.details-content {
+    padding: 20px;
+    font-size: 0.95rem;
+    color: #aaa;
+    border-left: 4px solid var(--blood-red);
+    margin: 15px;
+}
+
+.bead-info-row {
+    margin-bottom: 12px;
+}
+
+.bead-info-label {
+    color: var(--tarnished-gold);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.bead-info-value {
+    color: var(--parchment);
+    line-height: 1.5;
+}
+
+.map-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 15px;
+    border: 1px solid var(--blood-red);
+    color: var(--blood-red);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.map-btn:hover {
+    background: var(--blood-red);
+    color: #fff;
+}
+
+.tag {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border: 1px solid var(--iron-light);
+    margin-left: 10px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.ng-plus {
+    border-color: var(--tarnished-gold);
+    color: var(--tarnished-gold);
+}
+
+footer {
+    margin-top: 60px;
+    text-align: center;
+    color: var(--blood-red);
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.5;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    .container { margin: 10px; padding: 20px; }
+    .progress-section { flex-direction: column; align-items: flex-end; }
+    .progress-bar-container { width: 100%; }
+}
